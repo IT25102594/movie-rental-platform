@@ -1,10 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.movieplatform.Review" %>
+<%@ page import="com.movieplatform.models.Review" %>
 <html>
 <head>
     <title>All Reviews</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { padding: 20px; }
+    </style>
 </head>
 <body class="container mt-5">
 <h2>Community Movie Reviews</h2>
@@ -51,6 +54,7 @@
     %>
     </tbody>
 </table>
-<a href="write.jsp" class="btn btn-primary">Write a Review</a>
+<a href="/views/review/write.jsp" class="btn btn-primary">Write a Review</a>
 </body>
 </html>
+

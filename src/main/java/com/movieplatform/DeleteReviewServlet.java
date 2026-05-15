@@ -27,3 +27,4 @@ public class DeleteReviewServlet extends HttpServlet {
         response.sendRedirect("ViewReviewsServlet");
     }
 }
+

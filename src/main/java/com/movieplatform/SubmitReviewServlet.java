@@ -1,5 +1,8 @@
 package com.movieplatform;
 
+import com.movieplatform.models.GuestReview;
+import com.movieplatform.models.Review;
+import com.movieplatform.models.VerifiedRenterReview;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -25,7 +28,7 @@ public class SubmitReviewServlet extends HttpServlet {
         for (String line : rentals) {
             String[] parts = line.split(" \\| ");
             // Check if userId AND movieId match a record in rentals.txt
-            if (parts[1].equals(userId) && parts[2].equals(movieId)) {
+            if (parts.length > 2 && parts[1].equals(userId) && parts[2].equals(movieId)) {
                 hasRented = true;
                 break;
             }
@@ -46,6 +49,7 @@ public class SubmitReviewServlet extends HttpServlet {
         FileHandler.appendLine("review.txt", newReview.toFileString());
 
         // 6. Redirect back to view reviews
-        response.sendRedirect("views/review/viewreviews.jsp?status=success");
+        response.sendRedirect("ViewReviewsServlet");
     }
 }
+

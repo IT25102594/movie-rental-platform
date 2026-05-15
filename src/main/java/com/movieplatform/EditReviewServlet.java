@@ -22,7 +22,7 @@ public class EditReviewServlet extends HttpServlet {
                 break;
             }
         }
-        request.getRequestDispatcher("views/review/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/review/edit.jsp").forward(request, response);
     }
 
     // 2. Save the updated data
@@ -49,3 +49,4 @@ public class EditReviewServlet extends HttpServlet {
         response.sendRedirect("ViewReviewsServlet");
     }
 }
+

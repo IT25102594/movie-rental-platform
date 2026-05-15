@@ -7,49 +7,48 @@ public class FileHandler {
 
     private static final String DATA_DIR = "data/";
 
-    // reads all lines from a file, skips empty ones
     public static List<String> readAllLines(String filename) {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(DATA_DIR + filename))) {
+        File file = new File(DATA_DIR + filename);
+        if (!file.exists()) return lines;
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (!line.trim().isEmpty()) lines.add(line);
             }
         } catch (IOException e) {
-            System.out.println("couldnt read " + filename);
+            e.printStackTrace();
         }
         return lines;
     }
 
-    // adds one new line to the bottom of the file
     public static void appendLine(String filename, String line) {
         try (FileWriter fw = new FileWriter(DATA_DIR + filename, true)) {
             fw.write(line + "\n");
         } catch (IOException e) {
-            System.out.println("couldnt write to " + filename);
+            e.printStackTrace();
         }
     }
 
-    // rewrites the whole file - used when updating or deleting
     public static void writeAllLines(String filename, List<String> lines) {
         try (FileWriter fw = new FileWriter(DATA_DIR + filename, false)) {
             for (String line : lines) fw.write(line + "\n");
         } catch (IOException e) {
-            System.out.println("couldnt overwrite " + filename);
+            e.printStackTrace();
         }
     }
 
-    // finds a line by matching the first field (the id)
     public static String findById(String filename, String id) {
         for (String line : readAllLines(filename)) {
-            if (line.split("\\|")[0].equals(id)) return line;
+            String[] parts = line.split("\\|");
+            if (parts.length>0 && parts[0].equals(id)) return line;
         }
-        return null; // not found
+        return null;
     }
 
-    // generates next id e.g U001, M005
     public static String generateId(String filename, String prefix) {
-        return prefix + String.format("%03d", readAllLines(filename).size() + 1);
+        int count = readAllLines(filename).size();
+        return prefix + String.format("%03d", count + 1);
     }
-
 }
+

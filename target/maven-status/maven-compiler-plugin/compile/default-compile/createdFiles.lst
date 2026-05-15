@@ -1,1 +1,13 @@
+com\movieplatform\models\PremiumUser.class
+com\movieplatform\models\GuestReview.class
+com\movieplatform\ViewReviewsServlet.class
+com\movieplatform\models\RegularUser.class
+com\movieplatform\models\VerifiedRenterReview.class
+com\movieplatform\models\Review.class
 com\movieplatform\MovieRentalApplication.class
+com\movieplatform\FileHandler.class
+com\movieplatform\EditReviewServlet.class
+com\movieplatform\models\AdminUser.class
+com\movieplatform\models\User.class
+com\movieplatform\DeleteReviewServlet.class
+com\movieplatform\SubmitReviewServlet.class

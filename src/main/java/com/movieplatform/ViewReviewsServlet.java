@@ -1,5 +1,8 @@
 package com.movieplatform;
 
+import com.movieplatform.models.GuestReview;
+import com.movieplatform.models.Review;
+import com.movieplatform.models.VerifiedRenterReview;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -18,16 +21,19 @@ public class ViewReviewsServlet extends HttpServlet {
             // p[0]=ID, p[1]=User, p[2]=Movie, p[3]=Rating, p[4]=Text, p[5]=Time, p[6]=Type
             
             Review review;
-            if (p[6].equals("VERIFIED")) {
+            if (p.length > 6 && p[6].equals("VERIFIED")) {
                 review = new VerifiedRenterReview(p[0], p[1], p[2], Integer.parseInt(p[3]), p[4], p[5]);
-            } else {
+            } else if (p.length > 6) {
                 review = new GuestReview(p[0], p[1], p[2], Integer.parseInt(p[3]), p[4], p[5]);
+            } else {
+                continue;
             }
             allReviews.add(review);
         }
 
         // Send the list to the JSP page
         request.setAttribute("reviewList", allReviews);
-        request.getRequestDispatcher("views/review/viewreviews.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/review/viewreviews.jsp").forward(request, response);
     }
 }
+
